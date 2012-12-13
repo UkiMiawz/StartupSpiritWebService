@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="StartupSpiritData.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="StartupSpiritDataTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="StartupSpiritData" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="StartupSpiritDataContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SS_PlayerSet" EntityType="StartupSpiritData.SS_Player" />
+          <EntitySet Name="SS_Player_DetailsSet" EntityType="StartupSpiritData.SS_Player_Details" />
+          <EntitySet Name="SS_UniversitySet" EntityType="StartupSpiritData.SS_University" />
+          <EntitySet Name="SS_FacultySet" EntityType="StartupSpiritData.SS_Faculty" />
+          <EntitySet Name="SS_Game_Component_TypeSet" EntityType="StartupSpiritData.SS_Game_Component_Type" />
+          <AssociationSet Name="SS_PlayerSS_Player_Details" Association="StartupSpiritData.SS_PlayerSS_Player_Details">
+            <End Role="SS_Player" EntitySet="SS_PlayerSet" />
+            <End Role="SS_Player_Details" EntitySet="SS_Player_DetailsSet" />
+          </AssociationSet>
+          <EntitySet Name="SS_University_FacultySet" EntityType="StartupSpiritData.SS_University_Faculty" />
+          <AssociationSet Name="SS_University_FacultySS_University" Association="StartupSpiritData.SS_University_FacultySS_University">
+            <End Role="SS_University_Faculty" EntitySet="SS_University_FacultySet" />
+            <End Role="SS_University" EntitySet="SS_UniversitySet" />
+          </AssociationSet>
+          <AssociationSet Name="SS_University_FacultySS_Faculty" Association="StartupSpiritData.SS_University_FacultySS_Faculty">
+            <End Role="SS_University_Faculty" EntitySet="SS_University_FacultySet" />
+            <End Role="SS_Faculty" EntitySet="SS_FacultySet" />
+          </AssociationSet>
+          <AssociationSet Name="SS_Player_DetailsSS_University_Faculty" Association="StartupSpiritData.SS_Player_DetailsSS_University_Faculty">
+            <End Role="SS_Player_Details" EntitySet="SS_Player_DetailsSet" />
+            <End Role="SS_University_Faculty" EntitySet="SS_University_FacultySet" />
+          </AssociationSet>
+          <EntitySet Name="SS_Game_ComponentSet" EntityType="StartupSpiritData.SS_Game_Component" />
+          <EntitySet Name="SS_Game_Player_ProgressSet" EntityType="StartupSpiritData.SS_Game_Player_Progress" />
+          <AssociationSet Name="SS_PlayerSS_Game_Player_Progress" Association="StartupSpiritData.SS_PlayerSS_Game_Player_Progress">
+            <End Role="SS_Player" EntitySet="SS_PlayerSet" />
+            <End Role="SS_Game_Player_Progress" EntitySet="SS_Game_Player_ProgressSet" />
+          </AssociationSet>
+          <AssociationSet Name="SS_Game_Component_NameSS_Game_Component_Type" Association="StartupSpiritData.SS_Game_Component_NameSS_Game_Component_Type">
+            <End Role="SS_Game_Component_Name" EntitySet="SS_Game_ComponentSet" />
+            <End Role="SS_Game_Component_Type" EntitySet="SS_Game_Component_TypeSet" />
+          </AssociationSet>
+          <AssociationSet Name="SS_Game_Player_ProgressSS_Game_Component_Name" Association="StartupSpiritData.SS_Game_Player_ProgressSS_Game_Component_Name">
+            <End Role="SS_Game_Player_Progress" EntitySet="SS_Game_Player_ProgressSet" />
+            <End Role="SS_Game_Component_Name" EntitySet="SS_Game_ComponentSet" />
+          </AssociationSet>
+          <EntitySet Name="SS_User_RoleSet" EntityType="StartupSpiritData.SS_User_Role" />
+          <AssociationSet Name="SS_PlayerSS_User_Role" Association="StartupSpiritData.SS_PlayerSS_User_Role">
+            <End Role="SS_Player" EntitySet="SS_PlayerSet" />
+            <End Role="SS_User_Role" EntitySet="SS_User_RoleSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SS_Player">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Username" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="false" />
+          <Property Type="DateTime" Name="LastLogout" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <NavigationProperty Name="SS_Player_Details_Id" Relationship="StartupSpiritData.SS_PlayerSS_Player_Details" FromRole="SS_Player" ToRole="SS_Player_Details" />
+          <NavigationProperty Name="SS_Game_Player_Progress_Id" Relationship="StartupSpiritData.SS_PlayerSS_Game_Player_Progress" FromRole="SS_Player" ToRole="SS_Game_Player_Progress" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+          <NavigationProperty Name="SS_User_Role_Id" Relationship="StartupSpiritData.SS_PlayerSS_User_Role" FromRole="SS_Player" ToRole="SS_User_Role" />
+        </EntityType>
+        <EntityType Name="SS_Player_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" />
+          <Property Type="Int32" Name="Age" Nullable="false" />
+          <Property Type="String" Name="IpNumber" Nullable="false" />
+          <Property Type="String" Name="LastUpdated" Nullable="false" />
+          <NavigationProperty Name="SS_Player_Id" Relationship="StartupSpiritData.SS_PlayerSS_Player_Details" FromRole="SS_Player_Details" ToRole="SS_Player" />
+          <NavigationProperty Name="SS_University_Faculty_Id" Relationship="StartupSpiritData.SS_Player_DetailsSS_University_Faculty" FromRole="SS_Player_Details" ToRole="SS_University_Faculty" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SS_University">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="SS_University_Faculty_Id" Relationship="StartupSpiritData.SS_University_FacultySS_University" FromRole="SS_University" ToRole="SS_University_Faculty" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+          <Property Type="Int32" Name="SS_University_FacultyId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SS_Faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="SS_University_Faculty_Id" Relationship="StartupSpiritData.SS_University_FacultySS_Faculty" FromRole="SS_Faculty" ToRole="SS_University_Faculty" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+          <Property Type="Int32" Name="SS_University_FacultyId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SS_Game_Component_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="SS_Game_Component_Name_Id" Relationship="StartupSpiritData.SS_Game_Component_NameSS_Game_Component_Type" FromRole="SS_Game_Component_Type" ToRole="SS_Game_Component_Name" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+        </EntityType>
+        <Association Name="SS_PlayerSS_Player_Details">
+          <End Type="StartupSpiritData.SS_Player" Role="SS_Player" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_Player_Details" Role="SS_Player_Details" Multiplicity="1" />
+        </Association>
+        <EntityType Name="SS_University_Faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SS_University_Id" Relationship="StartupSpiritData.SS_University_FacultySS_University" FromRole="SS_University_Faculty" ToRole="SS_University" />
+          <NavigationProperty Name="SS_Faculty_Id" Relationship="StartupSpiritData.SS_University_FacultySS_Faculty" FromRole="SS_University_Faculty" ToRole="SS_Faculty" />
+          <NavigationProperty Name="SS_Player_Details_Id" Relationship="StartupSpiritData.SS_Player_DetailsSS_University_Faculty" FromRole="SS_University_Faculty" ToRole="SS_Player_Details" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+        </EntityType>
+        <Association Name="SS_University_FacultySS_University">
+          <End Type="StartupSpiritData.SS_University_Faculty" Role="SS_University_Faculty" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_University" Role="SS_University" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SS_University_Faculty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SS_University">
+              <PropertyRef Name="SS_University_FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SS_University_FacultySS_Faculty">
+          <End Type="StartupSpiritData.SS_University_Faculty" Role="SS_University_Faculty" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_Faculty" Role="SS_Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SS_University_Faculty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SS_Faculty">
+              <PropertyRef Name="SS_University_FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SS_Player_DetailsSS_University_Faculty">
+          <End Type="StartupSpiritData.SS_Player_Details" Role="SS_Player_Details" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_University_Faculty" Role="SS_University_Faculty" Multiplicity="1" />
+        </Association>
+        <EntityType Name="SS_Game_Component">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <NavigationProperty Name="SS_Game_Component_Type_Id" Relationship="StartupSpiritData.SS_Game_Component_NameSS_Game_Component_Type" FromRole="SS_Game_Component_Name" ToRole="SS_Game_Component_Type" />
+          <NavigationProperty Name="SS_Game_Player_Progress_Id" Relationship="StartupSpiritData.SS_Game_Player_ProgressSS_Game_Component_Name" FromRole="SS_Game_Component_Name" ToRole="SS_Game_Player_Progress" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SS_Game_Player_Progress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SS_Player_Id" Relationship="StartupSpiritData.SS_PlayerSS_Game_Player_Progress" FromRole="SS_Game_Player_Progress" ToRole="SS_Player" />
+          <NavigationProperty Name="SS_Game_Component_Name_Id" Relationship="StartupSpiritData.SS_Game_Player_ProgressSS_Game_Component_Name" FromRole="SS_Game_Player_Progress" ToRole="SS_Game_Component_Name" />
+          <Property Type="String" Name="Value" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+          <Property Type="Int32" Name="SS_PlayerId" Nullable="false" />
+        </EntityType>
+        <Association Name="SS_PlayerSS_Game_Player_Progress">
+          <End Type="StartupSpiritData.SS_Player" Role="SS_Player" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_Game_Player_Progress" Role="SS_Game_Player_Progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SS_Player">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SS_Game_Player_Progress">
+              <PropertyRef Name="SS_PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SS_Game_Component_NameSS_Game_Component_Type">
+          <End Type="StartupSpiritData.SS_Game_Component" Role="SS_Game_Component_Name" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_Game_Component_Type" Role="SS_Game_Component_Type" Multiplicity="1" />
+        </Association>
+        <Association Name="SS_Game_Player_ProgressSS_Game_Component_Name">
+          <End Type="StartupSpiritData.SS_Game_Player_Progress" Role="SS_Game_Player_Progress" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_Game_Component" Role="SS_Game_Component_Name" Multiplicity="1" />
+        </Association>
+        <EntityType Name="SS_User_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+          <NavigationProperty Name="SS_Player_Id" Relationship="StartupSpiritData.SS_PlayerSS_User_Role" FromRole="SS_User_Role" ToRole="SS_Player" />
+        </EntityType>
+        <Association Name="SS_PlayerSS_User_Role">
+          <End Type="StartupSpiritData.SS_Player" Role="SS_Player" Multiplicity="1" />
+          <End Type="StartupSpiritData.SS_User_Role" Role="SS_User_Role" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="StartupSpiritData" />
+        <Alias Key="Target" Value="StartupSpiritData.Store" />
+        <EntityContainerMapping CdmEntityContainer="StartupSpiritDataContainer" StorageEntityContainer="StartupSpiritDataTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a5fdabbfb9e431b8c5c319802fdb013" Name="Diagram1" >
+        <EntityTypeShape EntityType="StartupSpiritData.SS_Player" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_Player_Details" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_University" Width="1.875" PointX="7.75" PointY="4.5" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_Faculty" Width="1.5" PointX="7.75" PointY="1.375" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_Game_Component_Type" Width="2.25" PointX="8.375" PointY="10.75" />
+        <AssociationConnector Association="StartupSpiritData.SS_PlayerSS_Player_Details" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_University_Faculty" Width="1.75" PointX="5.25" PointY="3" />
+        <AssociationConnector Association="StartupSpiritData.SS_University_FacultySS_University" />
+        <AssociationConnector Association="StartupSpiritData.SS_University_FacultySS_Faculty" />
+        <AssociationConnector Association="StartupSpiritData.SS_Player_DetailsSS_University_Faculty" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_Game_Component" Width="1.5" PointX="6.125" PointY="10.625" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_Game_Player_Progress" Width="2.375" PointX="3" PointY="10.625" />
+        <AssociationConnector Association="StartupSpiritData.SS_PlayerSS_Game_Player_Progress" />
+        <AssociationConnector Association="StartupSpiritData.SS_Game_Component_NameSS_Game_Component_Type" />
+        <AssociationConnector Association="StartupSpiritData.SS_Game_Player_ProgressSS_Game_Component_Name" />
+        <EntityTypeShape EntityType="StartupSpiritData.SS_User_Role" Width="1.5" PointX="3" PointY="7.625" />
+        <AssociationConnector Association="StartupSpiritData.SS_PlayerSS_User_Role" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
